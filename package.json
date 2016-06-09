@@ -66,7 +66,6 @@
   "dependencies": {
     "bootstrap-contextmenu": "git://github.com/sydcanem/bootstrap-contextmenu",
     "bootstrap-sass": "^3.3.1",
-    "font-awesome": "^4.6.3",
     "jquery": "~ 1.11.0",
     "jquery-ui": "^1.10.5",
     "microplugin": "0.0.3",
@@ -75,7 +74,7 @@
     "underscore": "^1.7.0",
     "yasgui-utils": "^1.4.1",
     "yasgui-yasqe": "^2.10.0",
-    "yasgui-yasr": "^2.7.3"
+    "yasgui-yasr": "eccenca/YASGUI.YASR#9e2241a"
   },
   "browser": {
     "selectize": "./node_modules/selectize/dist/js/selectize.js"
