@@ -66,6 +66,7 @@
   "dependencies": {
     "bootstrap-contextmenu": "git://github.com/sydcanem/bootstrap-contextmenu",
     "bootstrap-sass": "^3.3.1",
+    "font-awesome": "^4.6.3",
     "jquery": "~ 1.11.0",
     "jquery-ui": "^1.10.5",
     "microplugin": "0.0.3",
