@@ -8,6 +8,7 @@ root.defaults = $.extend(true, root.defaults, {
 	sparql: {
 		showQueryButton: true,
 		acceptHeaderGraph: "text/turtle",
-		acceptHeaderSelect: "application/sparql-results+json"
+		acceptHeaderSelect: "application/sparql-results+json",
+        endpoint: "http://docker.local/sparql"
 	}
 });
