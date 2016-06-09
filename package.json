@@ -75,7 +75,7 @@
     "underscore": "^1.7.0",
     "yasgui-utils": "^1.4.1",
     "yasgui-yasqe": "^2.10.0",
-    "yasgui-yasr": "eccenca/YASGUI.YASR#9e2241a"
+    "yasgui-yasr": "eccenca/YASGUI.YASR#develop"
   },
   "browser": {
     "selectize": "./node_modules/selectize/dist/js/selectize.js"
