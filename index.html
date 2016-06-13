@@ -41,6 +41,7 @@
 
   function superclasses() {
     var qry = "\
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n \
 SELECT DISTINCT ?class \n \
 WHERE { [] rdfs:subClassOf ?class } \n \
 ORDER BY ?class";
