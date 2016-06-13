@@ -1,12 +1,12 @@
 {
     "queries": [{
         "name": "SuperClasses",
-        "sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?class WHERE { [] rdfs:subClassOf ?class } ORDER BY ?class"
+        "sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nSELECT DISTINCT ?class \nWHERE {\n    [] rdfs:subClassOf ?class \n} \nORDER BY ?class"
     }, {
         "name": "Classes",
-        "sparql": "SELECT DISTINCT ?class WHERE { [] a ?class } ORDER BY ?class"
+        "sparql": "SELECT DISTINCT ?class \nWHERE {\n    [] a ?class \n} \nORDER BY ?class"
     }, {
         "name": "Properties",
-        "sparql": "SELECT DISTINCT ?property WHERE { [] ?property [] } ORDER BY ?property"
+        "sparql": "SELECT DISTINCT ?property \nWHERE {\n    [] ?property [] \n} \nORDER BY ?property"
     }]
 }
