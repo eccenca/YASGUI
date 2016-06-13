@@ -24,13 +24,15 @@
               <button class="yasr_btn" onclick="classes();">Classes</button>
               <button class="yasr_btn" onclick="properties();">Properties</button>
             </div> 
-            <select class="form-control" id="queries_selector" onchange="loadQry();"></select> 
+            <select class="form-control" id="queries_selector" onchange="loadQry();">
+              <option selected="selected" value="-1">select to load query...</option>
+            </select> 
             <div class="form-group">
-              <label class="sr-only" for="save_name">Save as: </label>
+              <label for="save_name">Save as: </label>
               <input type="input" class="form-control" id="save_name" placeholder="Save as ..." /> 
             </div>
             <button type="submit" onclick="saveQry();" class="btn btn-default">Save</button>
-            <a id="test">show json</a>
+            <a id="test">show / load json</a>
           </div>
         </form>
         <p></p>
