@@ -1,7 +1,7 @@
 {
     "queries": [{
         "name": "SuperClasses",
-        "sparql": "SELECT DISTINCT ?class WHERE { [] rdfs:subClassOf ?class } ORDER BY ?class"
+        "sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?class WHERE { [] rdfs:subClassOf ?class } ORDER BY ?class"
     }, {
         "name": "Classes",
         "sparql": "SELECT DISTINCT ?class WHERE { [] a ?class } ORDER BY ?class"
