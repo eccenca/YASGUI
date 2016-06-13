@@ -1,12 +1,9 @@
 {
     "queries": [{
-        "name": "SuperClasses",
-        "sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nSELECT DISTINCT ?class \nWHERE {\n    [] rdfs:subClassOf ?class \n} \nORDER BY ?class"
+        "name": "Count Triple",
+        "sparql": "SELECT (count(DISTINCT ?s) as ?count)\nWHERE {\n  ?s a ?o .\n}"
     }, {
-        "name": "Classes",
-        "sparql": "SELECT DISTINCT ?class \nWHERE {\n    [] a ?class \n} \nORDER BY ?class"
-    }, {
-        "name": "Properties",
-        "sparql": "SELECT DISTINCT ?property \nWHERE {\n    [] ?property [] \n} \nORDER BY ?property"
+        "name": "Search Subject URI",
+        "sparql": "SELECT DISTINCT ?s\nWHERE {\n  ?s ?p ?o .\n  FILTER(regex(str(?s), 'corporatebond', 'i')) .\n}"
     }]
 }
