@@ -22,7 +22,7 @@
             <button class="yasr_btn" onclick="superclasses();">Super Classes</button>
             <button class="yasr_btn" onclick="classes();">Classes</button>
             <button class="yasr_btn" onclick="properties();">Properties</button>
-            <select class="form-control" id="queries_selector"></select>
+            <select class="form-control" id="queries_selector" onchange="loadQry();"></select>
           </div>
         </div>
         <p></p>
@@ -41,22 +41,23 @@
   jQuery.getJSON('sparql.json', function(data) {
     sparql = data;
     jQuery.each(sparql.queries, function(index, value) {
-      jQuery('#queries_selector').append(jQuery('<option onclick="loadQry('+index+')"></option>').val(index).html(value.name));
+      jQuery('#queries_selector').append(jQuery('<option></option>').val(index).html(value.name));
     });
   });
 
-  function loadQry(index) {
+  function loadQry(event) {
+    var index = jQuery('#queries_selector').val();
+    console.log("select qry: " + index);
     var qry = sparql.queries[index].sparql;
     var curTab = yasgui.current(); 
     curTab.yasqe.setValue(qry);
   }
 
-
   function superclasses() {
     var qry = "\
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n \
-SELECT DISTINCT ?class \n \
-WHERE { [] rdfs:subClassOf ?class } \n \
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n\
+SELECT DISTINCT ?class \n\
+WHERE { [] rdfs:subClassOf ?class } \n\
 ORDER BY ?class";
 
     var curTab = yasgui.current(); 
@@ -66,8 +67,8 @@ ORDER BY ?class";
 
   function classes() {
     var qry = "\
-SELECT DISTINCT ?class \n \
-WHERE { [] a ?class } \n \
+SELECT DISTINCT ?class \n\
+WHERE { [] a ?class } \n\
 ORDER BY ?class";
 
     var curTab = yasgui.current(); 
@@ -77,8 +78,8 @@ ORDER BY ?class";
 
   function properties() {
     var qry = "\
-SELECT DISTINCT ?property \n \
-WHERE { [] ?property [] } \n \
+SELECT DISTINCT ?property \n\
+WHERE { [] ?property [] } \n\
 ORDER BY ?property";
 
     var curTab = yasgui.current(); 
@@ -89,12 +90,12 @@ ORDER BY ?property";
   function descr(uri) {
     if (uri != null && uri != "") {
       var qry = "\
-SELECT DISTINCT ?property ?hasValue ?isValueOf \n \
-WHERE { \n \
-  { <"+uri+"> ?property ?hasValue } \n \
-  UNION \n \
-  { ?isValueOf ?property <"+uri+"> } \n \
-} \n \
+SELECT DISTINCT ?property ?hasValue ?isValueOf \n\
+WHERE { \n\
+  { <"+uri+"> ?property ?hasValue } \n\
+  UNION \n\
+  { ?isValueOf ?property <"+uri+"> } \n\
+} \n\
 ORDER BY (!BOUND(?hasValue)) ?property ?hasValue ?isValueOf";
       var curTab = yasgui.current(); 
       curTab.yasqe.setValue(qry);
