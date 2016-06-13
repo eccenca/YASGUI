@@ -17,14 +17,22 @@
     	<div class="col-md-12">
       	<h1>eccenca YASGUI</h1>
       	<p>eccenca YASGUI is a version of <a target="_blank" href="http://about.yasgui.org/">YASGUI<i class="fa fa-external-link" aria-hidden="true"></i></a> with capability of endpoint browsing inspired by <a target="_blank" href="https://github.com/kurtjx/SNORQL">Snorql<i class="fa fa-external-link" aria-hidden="true"></i></a>.</p>
-        <div class="yasr">
-          <div class="yasr_btnGroup">
-            <button class="yasr_btn" onclick="superclasses();">Super Classes</button>
-            <button class="yasr_btn" onclick="classes();">Classes</button>
-            <button class="yasr_btn" onclick="properties();">Properties</button>
-            <select class="form-control" id="queries_selector" onchange="loadQry();"></select>
+        <form action="#" class="form-inline">
+          <div class="yasr">
+            <div class="yasr_btnGroup">
+              <button class="yasr_btn" onclick="superclasses();">Super Classes</button>
+              <button class="yasr_btn" onclick="classes();">Classes</button>
+              <button class="yasr_btn" onclick="properties();">Properties</button>
+            </div> 
+            <select class="form-control" id="queries_selector" onchange="loadQry();"></select> 
+            <div class="form-group">
+              <label class="sr-only" for="save_name">Save as: </label>
+              <input type="input" class="form-control" id="save_name" placeholder="Save as ..." /> 
+            </div>
+            <button type="submit" onclick="saveQry();" class="btn btn-default">Save</button>
+            <a id="test">show json</a>
           </div>
-        </div>
+        </form>
         <p></p>
         <br />
       	<div id="showcase"></div>
@@ -36,72 +44,9 @@
 <script src="doc/doc.min.js"></script>
 <script type="text/javascript">
   var yasgui = YASGUI(document.getElementById("showcase"));
-  var sparql = null;
-
-  jQuery.getJSON('sparql.json', function(data) {
-    sparql = data;
-    jQuery.each(sparql.queries, function(index, value) {
-      jQuery('#queries_selector').append(jQuery('<option></option>').val(index).html(value.name));
-    });
-  });
-
-  function loadQry(event) {
-    var index = jQuery('#queries_selector').val();
-    console.log("select qry: " + index);
-    var qry = sparql.queries[index].sparql;
-    var curTab = yasgui.current(); 
-    curTab.yasqe.setValue(qry);
-  }
-
-  function superclasses() {
-    var qry = "\
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n\
-SELECT DISTINCT ?class \n\
-WHERE { [] rdfs:subClassOf ?class } \n\
-ORDER BY ?class";
-
-    var curTab = yasgui.current(); 
-    curTab.yasqe.setValue(qry);
-    curTab.yasqe.query();
-  }
-
-  function classes() {
-    var qry = "\
-SELECT DISTINCT ?class \n\
-WHERE { [] a ?class } \n\
-ORDER BY ?class";
-
-    var curTab = yasgui.current(); 
-    curTab.yasqe.setValue(qry);
-    curTab.yasqe.query();
-  }
-
-  function properties() {
-    var qry = "\
-SELECT DISTINCT ?property \n\
-WHERE { [] ?property [] } \n\
-ORDER BY ?property";
-
-    var curTab = yasgui.current(); 
-    curTab.yasqe.setValue(qry);
-    curTab.yasqe.query();
-  }
-
-  function descr(uri) {
-    if (uri != null && uri != "") {
-      var qry = "\
-SELECT DISTINCT ?property ?hasValue ?isValueOf \n\
-WHERE { \n\
-  { <"+uri+"> ?property ?hasValue } \n\
-  UNION \n\
-  { ?isValueOf ?property <"+uri+"> } \n\
-} \n\
-ORDER BY (!BOUND(?hasValue)) ?property ?hasValue ?isValueOf";
-      var curTab = yasgui.current(); 
-      curTab.yasqe.setValue(qry);
-      curTab.yasqe.query();
-    }
-  }
+</script>
+<script src="custom.js">
+  // todo: load/init queries from json string
 </script>
 </body>
 </html>
