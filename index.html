@@ -22,6 +22,7 @@
             <button class="yasr_btn" onclick="superclasses();">Super Classes</button>
             <button class="yasr_btn" onclick="classes();">Classes</button>
             <button class="yasr_btn" onclick="properties();">Properties</button>
+            <select class="form-control" id="queries_selector"></select>
           </div>
         </div>
         <p></p>
@@ -35,9 +36,21 @@
 <script src="doc/doc.min.js"></script>
 <script type="text/javascript">
   var yasgui = YASGUI(document.getElementById("showcase"));
-  
-  //todo: find way to update GUI component / or re-init with other default endpoint
-  //yasgui.current().yasqe.options.sparql.endpoint = "http://docker.local/sparql";
+  var sparql = null;
+
+  jQuery.getJSON('sparql.json', function(data) {
+    sparql = data;
+    jQuery.each(sparql.queries, function(index, value) {
+      jQuery('#queries_selector').append(jQuery('<option onclick="loadQry('+index+')"></option>').val(index).html(value.name));
+    });
+  });
+
+  function loadQry(index) {
+    var qry = sparql.queries[index].sparql;
+    var curTab = yasgui.current(); 
+    curTab.yasqe.setValue(qry);
+  }
+
 
   function superclasses() {
     var qry = "\
@@ -75,7 +88,7 @@ ORDER BY ?property";
 
   function descr(uri) {
     if (uri != null && uri != "") {
-        var qry = "\
+      var qry = "\
 SELECT DISTINCT ?property ?hasValue ?isValueOf \n \
 WHERE { \n \
   { <"+uri+"> ?property ?hasValue } \n \
@@ -83,9 +96,9 @@ WHERE { \n \
   { ?isValueOf ?property <"+uri+"> } \n \
 } \n \
 ORDER BY (!BOUND(?hasValue)) ?property ?hasValue ?isValueOf";
-    var curTab = yasgui.current(); 
-    curTab.yasqe.setValue(qry);
-    curTab.yasqe.query();
+      var curTab = yasgui.current(); 
+      curTab.yasqe.setValue(qry);
+      curTab.yasqe.query();
     }
   }
 </script>

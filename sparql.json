@@ -1,0 +1,12 @@
+{
+    "queries": [{
+        "name": "SuperClasses",
+        "sparql": "SELECT DISTINCT ?class WHERE { [] rdfs:subClassOf ?class } ORDER BY ?class"
+    }, {
+        "name": "Classes",
+        "sparql": "SELECT DISTINCT ?class WHERE { [] a ?class } ORDER BY ?class"
+    }, {
+        "name": "Properties",
+        "sparql": "SELECT DISTINCT ?property WHERE { [] ?property [] } ORDER BY ?property"
+    }]
+}
