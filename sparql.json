@@ -1,9 +1,9 @@
 {
     "queries": [{
         "name": "Count Triple",
-        "sparql": "SELECT (count(DISTINCT ?s) as ?count)\nWHERE {\n  ?s a ?o .\n}"
+        "sparql": "# count all triple \nSELECT (count(DISTINCT ?s) as ?count)\nWHERE {\n  ?s a ?o .\n}"
     }, {
         "name": "Search Subject URI",
-        "sparql": "SELECT DISTINCT ?s\nWHERE {\n  ?s ?p ?o .\n  FILTER(regex(str(?s), 'corporatebond', 'i')) .\n}"
+        "sparql": "# search subject uri for string specified in FILTER/REGEX\n# performs case in-sensitive search \nSELECT DISTINCT ?s\nWHERE {\n  ?s ?p ?o .\n  FILTER(regex(str(?s), 'corporatebond', 'i')) .\n}"
     }]
 }

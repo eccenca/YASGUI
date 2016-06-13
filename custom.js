@@ -64,7 +64,10 @@ function saveQry() {
 
 function loadQry(event) {
   var selVal = jQuery('#queries_selector').val();
-  if (selVal == "-1") return;
+  if (selVal == "-1") {
+    jQuery("#save_name").val("");
+    return;
+  }
   var text = jQuery("#queries_selector option:selected").text();
   jQuery("#save_name").val(text);
   console.log("select qry: " + selVal);
