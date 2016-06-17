@@ -5,6 +5,16 @@ jQuery.getJSON('sparql.json', function(data) {
   buildQrySelect();
 });
 
+jQuery.getJSON('sparql2.json', function(data) {
+  console.log(data);
+  if (data.queries) {
+    jQuery.each(data.queries, function(index, value) {
+      sparql['queries'].push(value);
+    });
+    buildQrySelect();
+  }
+});
+
 jQuery('#test').click(function() {
     copyJsonToClipboard(JSON.stringify(sparql))
 });
