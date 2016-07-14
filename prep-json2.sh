@@ -7,7 +7,7 @@ LINE=0
 echo "{" > ${OUT_FILE}
 echo "  \"queries\": [" >> ${OUT_FILE}
 
-jq -cr '.queries[]' queries/*.json | \
+jq -c '.queries[]' queries/*.json | \
 while read -r Q; do
     if [ ${LINE} -gt 0 ]; then 
         echo "," >> ${OUT_FILE}
